@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificaciones Catecismo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calificaciones Catecismo Llama de Amor<br>Libro 7 - Ciclo 2024-2025</h1>
+        <p>Algunos estudiantes aún no han presentado el examen. A lo largo del ciclo se realizarán otros 2 exámenes, cada uno valiendo el 33.33% de la calificación general. A partir del Libro 7, los estudiantes pueden ser dados de baja y/o reprobados.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Número</th>
+                    <th>Nombre</th>
+                    <th>Bienaventuranzas (60%)</th>
+                    <th>7 Dones (20%)</th>
+                    <th>12 Frutos (20%)</th>
+                    <th>Resultado (%)</th>
+                </tr>
+            </thead>
+            <tbody id="calificaciones-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        const estudiantes = [
+            { nombre: "Ángel García", bienaventuranzas: "8/9", dones: "0/7", frutos: "4/12" },
+            { nombre: "Brandon Martinez", bienaventuranzas: "12/12", dones: "7/7", frutos: "1/12" },
+            { nombre: "César Frausto", bienaventuranzas: "8/9", dones: "5/7", frutos: "5/12" },
+            { nombre: "Daila Diaz", bienaventuranzas: "8/9", dones: "5/7", frutos: "0/12" },
+            { nombre: "Denisse Ledezma", bienaventuranzas: "9/9", dones: "7/7", frutos: "12/12" },
+            { nombre: "Derek Espinoza", bienaventuranzas: "1/9", dones: "7/7", frutos: "2/12" },
+            { nombre: "Humberto Soriano", bienaventuranzas: "12/12", dones: "7/7", frutos: "12/12" },
+            { nombre: "Isam Martinez", bienaventuranzas: "12/12", dones: "7/7", frutos: "12/12" },
+            { nombre: "Jesús Reyes", bienaventuranzas: "9/9", dones: "7/7", frutos: "10/12" },
+            { nombre: "Pablo Frausto", bienaventuranzas: "12/12", dones: "7/7", frutos: "8/12" },
+            { nombre: "Samuel Lozano", bienaventuranzas: "0/9", dones: "7/7", frutos: "3/12" },
+            { nombre: "Sebastián Lozano", bienaventuranzas: "6/9", dones: "7/7", frutos: "12/12" },
+            { nombre: "Yeira Rangel", bienaventuranzas: "8/9", dones: "4/7", frutos: "12/12" }
+        ];
+
+        const tableBody = document.getElementById('calificaciones-body');
+
+        estudiantes.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+        estudiantes.forEach((estudiante, index) => {
+            const bienaventuranzas = estudiante.bienaventuranzas.split('/').map(Number);
+            const dones = estudiante.dones.split('/').map(Number);
+            const frutos = estudiante.frutos.split('/').map(Number);
+
+            const resultado = (
+                (bienaventuranzas[0] / bienaventuranzas[1]) * 60 +
+                (dones[0] / dones[1]) * 20 +
+                (frutos[0] / frutos[1]) * 20
+            ).toFixed(2);
+
+            const row = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${estudiante.nombre}</td>
+                    <td>${estudiante.bienaventuranzas}</td>
+                    <td>${estudiante.dones}</td>
+                    <td>${estudiante.frutos}</td>
+                    <td>${resultado}%</td>
+                </tr>
+            `;
+
+            tableBody.innerHTML += row;
+        });
+    </script>
+</body>
+</html>
